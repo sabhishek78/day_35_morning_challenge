@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:validators/validators.dart';
 // Stack Calculator
 // A stack machine processes instructions by pushing and popping values to an
 // internal stack. A simple example of this is a calculator.
@@ -22,6 +24,124 @@
 //  stackCalc("3 DUP +") ➞ 6
 //  stackCalc("6 5 5 7 * - /") ➞ 5
 //  stackCalc("x y +") ➞ Invalid instruction: x
+stackCalc(String inputString) {
+  List<int> Stack=[];
+  if(inputString==""){
+    return 0;
+  }
+  List<dynamic>inputList = inputString.split(" ").toList();
+  print("Input List=$inputList");
+  while(inputList.isNotEmpty){
+    if(isNumeric(readinputList(inputList))){
+      print("Integer found");
+      stackPush(int.parse(readinputList(inputList)),Stack);
+      inputList.removeAt(0);
+      print("Printing Stack");
+      print(Stack);
+      print("Printing inputList");
+      print(inputList);
+    }
+    else  if(readinputList(inputList) == "DUP"){
+      print("Duplicate");
+      int temp=stackPop(Stack);
+      print("Popping $temp from stack and pushing it two times");
+      stackPush(temp, Stack);
+      stackPush(temp, Stack);
+      inputList.removeAt(0);
+      print("Printing inputList");
+      print(inputList);
+    }
+    else if(readinputList(inputList)=="+"){
+      print("+ found");
+      int temp=stackPop(Stack)+stackPop(Stack);
+      print(temp);
+      stackPush(temp, Stack);
+      print(Stack);
+      inputList.removeAt(0);
+      print("Printing inputList");
+      print(inputList);
+    }
+    else if (readinputList(inputList)=='-'){
+      print("- found");
+      int temp=stackPop(Stack)-stackPop(Stack);
+      print(temp);
+      stackPush(temp, Stack);
+      print(Stack);
+      inputList.removeAt(0);
+      print("Printing inputList");
+      print(inputList);
+    }
+    else if (readinputList(inputList)=='/'){
+      print("/ found");
+      int temp=stackPop(Stack)~/stackPop(Stack);
+      print(temp);
+      stackPush(temp, Stack);
+      print(Stack);
+      inputList.removeAt(0);
+      print("Printing inputList");
+      print(inputList);
+    }
+    else if (readinputList(inputList)=='*'){
+      print("* found");
+      int temp=stackPop(Stack)*stackPop(Stack);
+      print(temp);
+      stackPush(temp, Stack);
+      print(Stack);
+      inputList.removeAt(0); print("Printing inputList");
+      print(inputList);
+
+    }
+    else{
+      return 0;
+    }
+
+  }
+  print("Input List Empty");
+  return stackPop(Stack);
+
+    }
+
+ // print("hi");
+ // return stackPop(Stack);
+
+
+
+String readinputList(List<dynamic> inputList){
+  return inputList[0];
+}
+void stackPush(int input, List<int> Stack){
+  Stack.add(input);
+
+}
+
+
+int stackPop(List<int> Stack){
+  if(Stack.isEmpty){
+   throw Exception("Empty Stack");
+  }
+  else{
+    int temp =Stack[Stack.length-1];
+    Stack.removeLast();
+    return temp;
+  }
+
+}
+
+
+
 
 main() {
+ print(stackCalc(""));
+ print(stackCalc("5 6 +"));
+  print(stackCalc("5 6 -"));
+  print(stackCalc("5 6 /"));
+print(stackCalc("5 6 *"));
+  print(stackCalc("3 DUP +"));
+ print(stackCalc("6 5 5 * -"));
+  print(stackCalc("6 5 5 * 7 + -"));
+
+
+
+
+
 }
