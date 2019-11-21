@@ -30,73 +30,82 @@ stackCalc(String inputString) {
     return 0;
   }
   List<dynamic>inputList = inputString.split(" ").toList();
-  print("Input List=$inputList");
+ // print("Input List=$inputList");
   while(inputList.isNotEmpty){
     if(isNumeric(readinputList(inputList))){
-      print("Integer found");
+    //  print("Integer found");
       stackPush(int.parse(readinputList(inputList)),Stack);
       inputList.removeAt(0);
-      print("Printing Stack");
-      print(Stack);
-      print("Printing inputList");
-      print(inputList);
+   //   print("Printing Stack");
+   //   print(Stack);
+   //   print("Printing inputList");
+    //  print(inputList);
     }
     else  if(readinputList(inputList) == "DUP"){
-      print("Duplicate");
+   //   print("Duplicate");
       int temp=stackPop(Stack);
-      print("Popping $temp from stack and pushing it two times");
+    //  print("Popping $temp from stack and pushing it two times");
       stackPush(temp, Stack);
       stackPush(temp, Stack);
       inputList.removeAt(0);
-      print("Printing inputList");
-      print(inputList);
+    //  print("Printing inputList");
+    //  print(inputList);
     }
     else if(readinputList(inputList)=="+"){
-      print("+ found");
+     // print("+ found");
       int temp=stackPop(Stack)+stackPop(Stack);
-      print(temp);
+   //   print(temp);
       stackPush(temp, Stack);
-      print(Stack);
+   //   print(Stack);
       inputList.removeAt(0);
-      print("Printing inputList");
-      print(inputList);
+   //   print("Printing inputList");
+   //   print(inputList);
     }
     else if (readinputList(inputList)=='-'){
-      print("- found");
+    //  print("- found");
       int temp=stackPop(Stack)-stackPop(Stack);
-      print(temp);
+   //   print(temp);
       stackPush(temp, Stack);
-      print(Stack);
+   //   print(Stack);
       inputList.removeAt(0);
-      print("Printing inputList");
-      print(inputList);
+   //   print("Printing inputList");
+   //   print(inputList);
     }
     else if (readinputList(inputList)=='/'){
-      print("/ found");
+    //  print("/ found");
       int temp=stackPop(Stack)~/stackPop(Stack);
-      print(temp);
+   //   print(temp);
       stackPush(temp, Stack);
-      print(Stack);
+    //  print(Stack);
       inputList.removeAt(0);
-      print("Printing inputList");
-      print(inputList);
+    //  print("Printing inputList");
+    //  print(inputList);
     }
     else if (readinputList(inputList)=='*'){
-      print("* found");
+    //  print("* found");
       int temp=stackPop(Stack)*stackPop(Stack);
-      print(temp);
+   //   print(temp);
       stackPush(temp, Stack);
-      print(Stack);
-      inputList.removeAt(0); print("Printing inputList");
-      print(inputList);
+   //   print(Stack);
+      inputList.removeAt(0);
+      //print("Printing inputList");
+   //   print(inputList);
 
+    }
+    else if (readinputList(inputList)=='POP'){
+     // print("POP found");
+
+      inputList.removeAt(0);
+      //print("Printing inputList");
+    //  print(inputList);
+      return stackPop(Stack);
     }
     else{
       return 0;
     }
 
   }
-  print("Input List Empty");
+ // print("Input List Empty");
   return stackPop(Stack);
 
     }
@@ -117,7 +126,7 @@ void stackPush(int input, List<int> Stack){
 
 int stackPop(List<int> Stack){
   if(Stack.isEmpty){
-   throw Exception("Empty Stack");
+   return 0;
   }
   else{
     int temp =Stack[Stack.length-1];
@@ -133,13 +142,13 @@ int stackPop(List<int> Stack){
 main() {
  print(stackCalc(""));
  print(stackCalc("5 6 +"));
-  print(stackCalc("5 6 -"));
-  print(stackCalc("5 6 /"));
+ print(stackCalc("5 6 -"));
+ print(stackCalc("5 6 /"));
 print(stackCalc("5 6 *"));
-  print(stackCalc("3 DUP +"));
- print(stackCalc("6 5 5 * -"));
+ print(stackCalc("3 DUP +"));
+print(stackCalc("6 5 5 * -"));
   print(stackCalc("6 5 5 * 7 + -"));
-
+  print(stackCalc("5 POP"));
 
 
 
