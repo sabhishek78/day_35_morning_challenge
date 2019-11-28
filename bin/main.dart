@@ -60,7 +60,7 @@ stackCalc(String inputString) {
 
       return stackPop(Stack);
     } else {
-      return 0;
+      throw ArgumentError;
     }
   }
 
